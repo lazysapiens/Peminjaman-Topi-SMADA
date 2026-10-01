@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TopiSMADA – Peminjaman Topi SMA Negeri 2 Jember</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f4ee;--card:#fff;--ink:#17202a;--mut:#667085;--line:#e5e1d6;--pri:#0b3d91;--acc:#e8a317;--ok:#16a34a;--bad:#dc2626;--hat:#dbe7ff;--hatb:#9db8ee}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1320;--card:#161e30;--ink:#eef1f7;--mut:#9aa6bd;--line:#26314a;--pri:#6d9bff;--acc:#f2b632;--hat:#1f2d4d;--hatb:#35508f}}
+:root[data-theme="dark"]{--bg:#0d1320;--card:#161e30;--ink:#eef1f7;--mut:#9aa6bd;--line:#26314a;--pri:#6d9bff;--acc:#f2b632;--hat:#1f2d4d;--hatb:#35508f}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+header.hero{background:linear-gradient(135deg,#0b3d91,#14275c);color:#fff;padding:44px 0 70px;position:relative;overflow:hidden}
+header.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:rgba(232,163,23,.25)}
+.badge{display:inline-block;background:rgba(255,255,255,.15);padding:4px 12px;border-radius:99px;font-size:13px;margin-bottom:14px}
+h1{font-size:clamp(28px,6vw,46px);margin:0 0 10px;line-height:1.15}
+h1 span{color:var(--acc)}
+.hero p{max-width:540px;opacity:.9;margin:0 0 22px}
+.btn{display:inline-block;border:0;cursor:pointer;background:var(--acc);color:#1b1500;font-weight:700;padding:13px 24px;border-radius:12px;font-size:16px;text-decoration:none}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sec{background:transparent;border:2px solid var(--line);color:var(--ink)}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.stats div{background:rgba(255,255,255,.12);border-radius:12px;padding:10px 16px;font-size:13px}
+.stats b{display:block;font-size:20px}
+main{margin-top:-40px;position:relative}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.card h2{margin:0 0 4px;font-size:20px}
+.card .sub{color:var(--mut);font-size:14px;margin:0 0 16px}
+.num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--pri);color:#fff;font-size:14px;align-items:center;justify-content:center;margin-right:8px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+input,select{width:100%;padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px;font-family:inherit}
+input:focus,select:focus{outline:2px solid var(--pri);border-color:transparent}
+.screen{height:8px;border-radius:99px;background:linear-gradient(90deg,transparent,var(--acc),transparent);margin:6px auto 4px;max-width:420px}
+.screen-l{text-align:center;font-size:12px;color:var(--mut);margin-bottom:18px;letter-spacing:2px}
+.hats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:480px;margin:0 auto}
+.hat{aspect-ratio:1;border-radius:14px;border:2px solid var(--hatb);background:var(--hat);cursor:pointer;font-weight:700;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;transition:.15s}
+.hat span.i{font-size:24px;line-height:1}
+.hat:hover:not(:disabled){transform:translateY(-3px)}
+.hat.sel{background:var(--acc);border-color:var(--acc);color:#1b1500}
+.hat:disabled{background:repeating-linear-gradient(45deg,var(--line),var(--line) 6px,transparent 6px,transparent 12px);border-color:var(--line);color:var(--mut);cursor:not-allowed}
+.legend{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-top:16px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:5px;border:2px solid var(--hatb);background:var(--hat)}
+.legend i.s{background:var(--acc);border-color:var(--acc)}
+.legend i.b{background:var(--line);border-color:var(--line)}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:14px;margin:8px 0}
+.check input{width:auto;margin-top:4px}
+.sum{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;border-top:2px dashed var(--line);padding-top:16px;margin-top:16px}
+.total{font-size:26px;font-weight:800;color:var(--pri)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+ul.r{margin:0;padding:0;list-style:none}
+ul.r li{padding:10px 12px;border-radius:10px;margin-bottom:8px;font-size:14.5px;display:flex;gap:10px}
+.ok li{background:rgba(22,163,74,.12)}.no li{background:rgba(220,38,38,.12)}
+.price{font-size:34px;font-weight:800;color:var(--pri)}
+.price small{font-size:15px;color:var(--mut);font-weight:500}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:26px 18px 40px}
+footer a{color:var(--pri);font-weight:600}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:18px;z-index:9;overflow:auto}
+.modal.on{display:flex}
+.ticket{background:var(--card);border-radius:20px;max-width:380px;width:100%;overflow:hidden}
+.t-top{background:var(--pri);color:#fff;padding:18px 20px}
+.t-top small{opacity:.8}.t-top h3{margin:2px 0 0;font-size:20px}
+.t-body{padding:18px 20px;font-size:14px}
+.t-body div{display:flex;justify-content:space-between;gap:10px;padding:5px 0}
+.t-body div span:first-child{color:var(--mut)}
+.t-cut{border-top:2px dashed var(--line);margin:0 -20px;position:relative}
+.code{text-align:center;font-family:monospace;font-size:22px;font-weight:800;letter-spacing:3px;padding:14px 0 4px}
+.t-act{padding:0 20px 20px;display:grid;gap:8px}
+.t-act .btn{text-align:center;width:100%}
+.err{color:var(--bad);font-size:13px;min-height:18px;margin-top:8px}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <span class="badge">🎓 SMA Negeri 2 Jember · SMADA</span>
+  <h1>Pinjam Topi, <span>Booking</span> Semudah Pesan Tiket</h1>
+  <p>Pilih tanggal, jam, dan nomor topi favoritmu. Tiket peminjaman langsung jadi dan bisa dikonfirmasi lewat WhatsApp.</p>
+  <a class="btn" href="#booking">Pesan Sekarang</a>
+  <div class="stats"><div><b>10</b>Topi tersedia</div><div><b>Rp 5.000</b>per jam / topi</div><div><b>Khusus</b>siswa SMADA</div></div>
+</div></header>
+
+<main class="wrap">
+<section class="card" id="booking">
+  <h2><span class="num">1</span>Pilih Jadwal</h2>
+  <p class="sub">Tentukan kapan dan berapa lama kamu meminjam.</p>
+  <div class="grid2">
+    <div><label for="tgl">Tanggal</label><input type="date" id="tgl"></div>
+    <div><label for="jam">Jam mulai</label><select id="jam"></select></div>
+    <div><label for="dur">Durasi</label><select id="dur"></select></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2><span class="num">2</span>Pilih Topi</h2>
+  <p class="sub">Ketuk nomor topi yang ingin dipinjam (bisa lebih dari satu).</p>
+  <div class="screen"></div><div class="screen-l">MEJA PETUGAS</div>
+  <div class="hats" id="hats"></div>
+  <div class="legend"><span><i></i>Tersedia</span><span><i class="s"></i>Dipilih</span><span><i class="b"></i>Sudah dipinjam</span></div>
+</section>
+
+<section class="card">
+  <h2><span class="num">3</span>Data Peminjam</h2>
+  <p class="sub">Isi sesuai kartu pelajar SMADA.</p>
+  <div class="grid2">
+    <div><label for="nama">Nama lengkap</label><input id="nama" placeholder="Nama sesuai kartu pelajar"></div>
+    <div><label for="kelas">Kelas</label><input id="kelas" placeholder="Contoh: XI IPA 3"></div>
+    <div><label for="nis">NIS</label><input id="nis" inputmode="numeric" placeholder="Nomor Induk Siswa"></div>
+  </div>
+  <label class="check"><input type="checkbox" id="c1"> Saya anggota/siswa SMADA.</label>
+  <label class="check"><input type="checkbox" id="c2"> Saya memiliki kartu pelajar SMADA dan akan menunjukkannya saat pengambilan.</label>
+  <label class="check"><input type="checkbox" id="c3"> Saya tidak akan mengotori topi dan tidak akan mencoret-coretnya.</label>
+  <div class="sum">
+    <div><div style="font-size:13px;color:var(--mut)" id="ringkas">Belum ada topi dipilih</div><div class="total" id="total">Rp 0</div></div>
+    <button class="btn" id="pesan">Pesan Tiket 🎟️</button>
+  </div>
+  <div class="err" id="err"></div>
+</section>
+
+<div class="two">
+  <section class="card"><h2>✅ Syarat</h2><p class="sub">Wajib dipenuhi peminjam.</p>
+    <ul class="r ok"><li>👥 Wajib beranggotakan SMADA</li><li>🪪 Mempunyai kartu pelajar SMADA</li></ul></section>
+  <section class="card"><h2>🚫 Larangan</h2><p class="sub">Jaga topi tetap bersih.</p>
+    <ul class="r no"><li>🧼 Dilarang mengotori / terkena noda</li><li>✏️ Tidak boleh dicoret-coret</li></ul></section>
+</div>
+
+<section class="card" style="text-align:center">
+  <h2>Tarif</h2>
+  <div class="price">Rp 5.000 <small>/ jam / topi</small></div>
+  <p class="sub" style="margin-top:8px">Ada pertanyaan? Hubungi <b>Bagus Eko</b></p>
+  <a class="btn" target="_blank" rel="noopener" href="https://wa.me/6282139789669">💬 +62 821-3978-9669</a>
+</section>
+</main>
+
+<footer>© 2026 Peminjaman Topi SMA Negeri 2 Jember · Kontak: Bagus Eko, <a href="https://wa.me/6282139789669" target="_blank" rel="noopener">+62 821-3978-9669</a><br>Data pesanan tersimpan di Google Sheets; konfirmasi akhir oleh petugas via WhatsApp.</footer>
+
+<div class="modal" id="modal"><div class="ticket">
+  <div class="t-top"><small>TIKET PEMINJAMAN TOPI</small><h3>SMA Negeri 2 Jember</h3></div>
+  <div class="t-body" id="tbody"></div>
+  <div class="t-cut"></div>
+  <div class="code" id="kode"></div>
+  <div style="text-align:center;font-size:12px;color:var(--mut);padding-bottom:14px">Tunjukkan kartu pelajar SMADA saat mengambil topi</div>
+  <div class="t-act"><a class="btn" id="wa" target="_blank" rel="noopener">Konfirmasi via WhatsApp</a><button class="btn sec" id="tutup">Tutup</button></div>
+</div></div>
+
+<script>
+const PRICE=5000,TOTAL=10,WA="6282139789669";
+// ====== PASTE URL WEB APP GOOGLE APPS SCRIPT DI SINI (lihat PANDUAN.md) ======
+const SHEETS_URL="";
+// ==============================================================================
+async function loadSheet(){if(!SHEETS_URL)return;try{const r=await fetch(SHEETS_URL);const j=await r.json();bookings=j.bookings||[]}catch(e){}}
+const $=id=>document.getElementById(id);
+let sel=new Set(),bookings=[];
+try{bookings=JSON.parse(localStorage.getItem("topi_smada")||"[]")}catch(e){}
+const rp=n=>"Rp "+n.toLocaleString("id-ID");
+const pad=n=>String(n).padStart(2,"0");
+const today=new Date();today.setMinutes(today.getMinutes()-today.getTimezoneOffset());
+$("tgl").min=$("tgl").value=today.toISOString().slice(0,10);
+for(let h=6;h<=16;h++)$("jam").innerHTML+=`<option value="${h}">${pad(h)}:00</option>`;
+for(let d=1;d<=6;d++)$("dur").innerHTML+=`<option value="${d}">${d} jam</option>`;
+$("jam").value=7;
+function busy(n){const s=+$("jam").value,e=s+ +$("dur").value;
+  return bookings.some(b=>b.tgl===$("tgl").value&&b.hats.includes(n)&&s<b.end&&b.start<e)}
+function render(){
+  const g=$("hats");g.innerHTML="";
+  for(let n=1;n<=TOTAL;n++){
+    if(busy(n))sel.delete(n);
+    const b=document.createElement("button");b.className="hat"+(sel.has(n)?" sel":"");
+    b.disabled=busy(n);b.innerHTML=`<span class="i">🧢</span>${n}`;
+    b.onclick=()=>{sel.has(n)?sel.delete(n):sel.add(n);render()};g.appendChild(b);
+  }
+  const d=+$("dur").value,k=sel.size;
+  $("ringkas").textContent=k?`Topi ${[...sel].sort((a,b)=>a-b).join(", ")} × ${d} jam`:"Belum ada topi dipilih";
+  $("total").textContent=rp(k*d*PRICE);
+}
+["tgl","jam","dur"].forEach(i=>$(i).onchange=render);
+function fmtTgl(s){return new Date(s+"T00:00").toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}
+$("pesan").onclick=async()=>{
+  const nama=$("nama").value.trim(),kelas=$("kelas").value.trim(),nis=$("nis").value.trim();
+  const err=m=>($("err").textContent=m);
+  if(!$("tgl").value)return err("Pilih tanggal terlebih dahulu.");
+  if(!sel.size)return err("Pilih minimal satu topi.");
+  if(!nama||!kelas||!nis)return err("Lengkapi nama, kelas, dan NIS.");
+  if(!($("c1").checked&&$("c2").checked&&$("c3").checked))return err("Centang semua persyaratan dan larangan.");
+  err("");
+  const hats=[...sel].sort((a,b)=>a-b),s=+$("jam").value,d=+$("dur").value,tot=hats.length*d*PRICE;
+  const kode="SMADA-"+Math.random().toString(36).slice(2,6).toUpperCase()+pad(hats.length);
+  const rec={kode,tgl:$("tgl").value,start:s,end:s+d,hats,nama,kelas,nis};
+  if(SHEETS_URL){const bt=$("pesan");bt.disabled=true;bt.textContent="Menyimpan…";
+    try{const r=await fetch(SHEETS_URL,{method:"POST",body:JSON.stringify(rec)});const j=await r.json();
+      if(!j.ok){err(j.error||"Gagal menyimpan.");await loadSheet();render();return}}
+    catch(x){err("Tidak bisa terhubung ke server. Coba lagi.");return}
+    finally{bt.disabled=false;bt.textContent="Pesan Tiket 🎟️"}
+  }
+  bookings.push(rec);
+  try{localStorage.setItem("topi_smada",JSON.stringify(bookings))}catch(e){}
+  const rows=[["Nama",nama],["Kelas / NIS",kelas+" / "+nis],["Tanggal",fmtTgl($("tgl").value)],["Jam",`${pad(s)}:00 – ${pad(s+d)}:00 (${d} jam)`],["Topi","No. "+hats.join(", ")],["Total",rp(tot)]];
+  $("tbody").innerHTML=rows.map(r=>`<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join("");
+  $("kode").textContent=kode;
+  const msg=`Halo Kak Bagus Eko, saya ingin konfirmasi peminjaman topi SMADA.\nKode: ${kode}\nNama: ${nama}\nKelas/NIS: ${kelas} / ${nis}\nTanggal: ${fmtTgl($("tgl").value)}\nJam: ${pad(s)}:00–${pad(s+d)}:00\nTopi no: ${hats.join(", ")}\nTotal: ${rp(tot)}`;
+  $("wa").href=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+  $("modal").classList.add("on");sel.clear();render();
+};
+$("tutup").onclick=()=>$("modal").classList.remove("on");
+render();loadSheet().then(render);
+</script>
+</body>
+</html>
